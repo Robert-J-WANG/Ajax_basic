@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="css/bootstrap.css">
+    <script>
+        window.addEventListener('DOMContentLoaded', function () {
+            var btn = document.querySelector('#btnUpload');
+            btn.addEventListener('click', function () {
+                //获取到选择的文件列表
+                var files = document.querySelector('#file1').files;
+                console.log(files);
+                if (files.length <= 0) {
+                    return alert('请上传文件！');
+                }
+
+                var fd = new FormData();
+                fd.append('avatar', files[0]);
+
+                var xhr = new XMLHttpRequest();
+
+                xhr.upload.addEventListener('progress', function (evt) {
+                    if (evt.lengthComputable) {//evt.lengthComputable--布尔值，表示当前上传的文件是否具有可计算的长度
+                        //e.loaded--已传输的字节；e.total--需传输的总字节
+                        var progress = Math.ceil((evt.loaded / evt.total) * 100);
+                        console.log(progress);
+                        var progressBar = document.querySelector('#percent');
+                        progressBar.style.width = `${progress}%`;
+                        progressBar.innerHTML = `${progress}%`;
+                    }
+                })
+
+                xhr.upload.addEventListener('load', function () {
+                    var progressBar = document.querySelector('#percent');
+                    progressBar.setAttribute('class', 'progress-bar progress-bar-success');
+                })
+
+                xhr.timeout = 3000;
+                xhr.ontimeout = function () {
+                    alert('请求超时！');
+                }
+                xhr.open('POST', 'http://www.liulongbin.top:3006/api/upload/avatar');
+                xhr.send(fd);
+
+                xhr.addEventListener('readystatechange', function () {
+                    if (xhr.readyState === 4 && xhr.status === 200) {
+                        var data = JSON.parse(xhr.responseText);
+                        console.log(data);
+                        if (data.status === 200) {//成功上传文件
+                            //将服务器返回的图片地址设置为<img>标签的src属性
+                            document.querySelector('#pic').src = `http://www.liulongbin.top:3006${data.url}`;
+                        } else {//上传文件失败
+                            console.log(data.message);
+                        }
+                    }
+                })
+            })
+        })
+    </script>
+</head>
+<body>
+选择要上传的文件<input type="file" id="file1" value="选择文件"></br>
+<button id="btnUpload">提交</button>
+</br>
+<div class="progress" style="width: 500px; margin: 15px 10px">
+    <div class="progress-bar progress-bar-striped active" style="width: 0%" id="percent">0%</div>
+</div>
+<img src="" id="pic" width="800">
+</body>
+</html>

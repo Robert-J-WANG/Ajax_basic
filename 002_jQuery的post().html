@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="004_图书管理案例/js/jQuery.min.js"></script>
+    <script>
+        //$.post(url, [data], [callback], [type])--向服务器提交数据
+        // url:发送请求地址。
+        // data:待发送 Key/value 参数。
+        // callback:发送成功时回调函数。
+        // type:返回内容格式，xml, html, script, json, text, _default。
+        $(function () {
+            $('.postBtn').on('click', function () {
+                $.post('http://www.liulongbin.top:3006/api/addbook', {
+                    bookname: "水浒传",
+                    author: "施耐庵",
+                    publisher: "上海图书出版社"
+                }, function (res) {
+                    console.log(res);
+                })
+            })
+        })
+    </script>
+</head>
+<body>
+<button class="postBtn">发起POST请求</button>
+</body>
+</html>

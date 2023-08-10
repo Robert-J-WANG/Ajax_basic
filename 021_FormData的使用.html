@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script>
+        //用来提交表单数据
+        var fd = new FormData();
+        fd.append('uname', 'zs');
+        fd.append('upwd', '123456');
+        var xhr = new XMLHttpRequest();
+        xhr.timeout = 300;
+        xhr.ontimeout = function () {
+            alert('请求超时！');
+        }
+        xhr.open('POST', 'http://www.liulongbin.top:3006/api/formdata');
+        xhr.send(fd);
+        xhr.onreadystatechange = function () {
+            if (xhr.readyState === 4 && xhr.status === 200) {
+                console.log(xhr.responseText);
+            }
+        }
+
+        window.addEventListener('DOMContentLoaded', function () {
+            //用来获取网页表单的值
+            var form = document.querySelector('#form1');
+            form.addEventListener('submit', function (evt) {
+                evt.preventDefault();
+                var fd = new FormData(form);
+                var xhr = new XMLHttpRequest();
+                xhr.timeout = 300;
+                xhr.ontimeout = function () {
+                    alert('请求超时！');
+                }
+                xhr.open('POST', 'http://www.liulongbin.top:3006/api/formdata');
+                xhr.send(fd);
+                xhr.onreadystatechange = function () {
+                    if (xhr.readyState === 4 && xhr.status === 200) {
+                        console.log(JSON.parse(xhr.responseText));
+                    }
+                }
+            })
+        })
+    </script>
+</head>
+<body>
+<form id="form1">
+    <div>评论人：</div>
+    <input type="text" name="username" autocomplete="off" id="username">
+    <div>评论内容：</div>
+    <input class="password" name="content" id="content">
+    <button type="submit" class="btn btn-primary">发表评论</button>
+</form>
+</body>
+</html>

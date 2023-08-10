@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="js/myAjax.js"></script>
+    <script>
+        window.addEventListener('DOMContentLoaded', function () {
+            myAjax({
+                method: 'GET',
+                url: 'http://www.liulongbin.top:3006/api/getbooks',
+                data: {id: 1},
+                success: function (res) {
+                    console.log(res);
+                }
+            });
+
+            myAjax({
+                method: 'POST',
+                url: 'http://www.liulongbin.top:3006/api/addbook',
+                data: {
+                    bookname: '前端进阶',
+                    author: '黑马程序员',
+                    publisher: '黑马前端'
+                },
+                success: function (res) {
+                    console.log(res);
+                }
+            });
+        })
+    </script>
+</head>
+<body>
+
+</body>
+</html>

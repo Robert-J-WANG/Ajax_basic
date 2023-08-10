@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script>
+        var xhr = new XMLHttpRequest();
+        //设置超时时间
+        xhr.timeout = 30;
+        xhr.ontimeout = function () {
+            alert('请求超时！');
+        }
+
+        //使用xhr 对象发起带参数的 GET 请求时，只需在调用 xhr.open 期间，为URL地址指定参数即可--查询字符串
+        //想加上多个参数的话，使用 & 符号进行分隔
+        xhr.open('GET', 'http://www.liulongbin.top:3006/api/getbooks');
+        xhr.send();
+        xhr.onreadystatechange = function () {
+            if (xhr.readyState === 4 && xhr.status === 200) {
+                console.log(xhr.responseText);
+            }
+        }
+    </script>
+</head>
+<body>
+
+</body>
+</html>

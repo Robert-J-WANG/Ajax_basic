@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="js/axios.min.js"></script>
+    <script>
+        window.addEventListener('DOMContentLoaded', function () {
+            var btnGET = document.querySelector('#btnGET');
+            btnGET.addEventListener('click', function () {
+                axios.get('http://www.liulongbin.top:3006/api/get', {
+                    params: {
+                        name: 'zs',
+                        age: 20
+                    }
+                }).then(function (res) {
+                    console.log(res.data);
+                }).catch(function (error) {
+                    console.log(error);
+                });
+            });
+
+            var btnPOST = document.querySelector('#btnPOST');
+            btnPOST.addEventListener('click', function () {
+                axios.post('http://www.liulongbin.top:3006/api/post', {
+                    location: '江苏',
+                    address: '苏州'
+                }).then(function (res) {
+                    console.log(res.data);
+                }).catch(function (error) {
+                    console.log(error);
+                });
+            })
+
+            var btnAjaxGET = document.querySelector('#btnAjaxGET');
+            btnAjaxGET.addEventListener('click', function () {
+                axios({
+                    method: 'get',
+                    url: 'http://www.liulongbin.top:3006/api/get',
+                    params: {name: 'ls', age: 10},
+                }).then(function (res) {
+                    console.log(res.data);
+                }).catch(function (error) {
+                    console.log(error);
+                });
+            })
+
+            var btnAjaxPOST = document.querySelector('#btnAjaxPOST');
+            btnAjaxPOST.addEventListener('click', function () {
+                axios({
+                    method: 'post',
+                    url: 'http://www.liulongbin.top:3006/api/post',
+                    data: {bookname: '演员的自我修养', price: 666}
+                }).then(function (res) {
+                    console.log(res.data);
+                }).catch(function (error) {
+                    console.log(error);
+                });
+            })
+        })
+    </script>
+</head>
+<body>
+<button id="btnGET">发起GET请求</button>
+<button id="btnPOST">发起POST请求</button>
+<button id="btnAjaxGET">发起AjaxGET请求</button>
+<button id="btnAjaxPOST">发起AjaxPOST请求</button>
+</body>
+</html>

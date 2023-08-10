@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>新闻列表</title>
+    <link rel="stylesheet" href="css/news.css">
+    <script src="js/template-web.js"></script>
+    <script src="js/jQuery.min.js"></script>
+    <script>
+        $(function () {
+            $.get('http://www.liulongbin.top:3006/api/news', function (res) {
+                if (res.status !== 200) {
+                    return alert('获取新闻列表失败！');
+                }
+
+                var rows = [];
+                $.each(res.data, function (i, item) {
+                    rows.push(`<div class="news-item">
+        <img class="thumb" src="http://www.liulongbin.top:3006${item.img}" alt="" />
+        <div class="right-box">
+          <h1 class="title">${item.title}</h1>
+          <div class="tags">
+            <span>${item.tags.split(',')[0]}</span>
+            <span>${item.tags.split(',')[1]}</span>
+            <span>${item.tags.split(',')[2]}</span>
+          </div>
+          <div class="footer">
+            <div>
+              <span>${item.source}</span>&nbsp;&nbsp;
+              <span>${setTime(item.time)}</span>
+            </div>
+            <span>评论数：${item.cmtcount}</span>
+          </div>
+        </div>
+      </div>`);
+                });
+                $('#news-list').html(rows.join(''));
+            })
+
+            function setTime(time) {
+                var time = new Date(time);
+
+                var year = time.getFullYear();
+                var month = time.getMonth();
+                month = month < 10 ? '0' + month : month;
+                var date = time.getDate();
+                date = date < 10 ? '0' + date : date;
+
+                var hour = time.getHours();
+                hour = hour < 10 ? '0' + hour : hour;
+                var minute = time.getMinutes();
+                minute = minute < 10 ? '0' + minute : minute;
+                var second = time.getSeconds();
+                second = second < 10 ? '0' + second : second;
+
+                return `${year}-${month}-${date} ${hour}:${minute}:${second}`;
+            }
+        })
+    </script>
+</head>
+<body>
+<div id="news-list"></div>
+</body>
+</html>

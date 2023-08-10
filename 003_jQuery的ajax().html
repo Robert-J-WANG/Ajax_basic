@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="004_图书管理案例/js/jQuery.min.js"></script>
+    <script>
+        //$.ajax(url,[settings])--请求加载远程数据
+        // type:请求的方式，如GET或POST
+        // url:一个用来包含发送请求的URL字符串。
+        // data:这次请求要携带的数据
+        // success:请求成功之后的回调函数
+        $(function () {
+            $('.ajaxGETBtn').on('click', function () {
+                $.ajax({
+                    types: 'GET',
+                    url: 'http://www.liulongbin.top:3006/api/getbooks',
+                    data: {id: 1},
+                    success: function (res) {
+                        console.log(res);
+                    }
+                })
+            })
+
+            $('.ajaxPOSTBtn').on('click', function () {
+                $.ajax({
+                    type: 'POST',
+                    url: 'http://www.liulongbin.top:3006/api/addbook',
+                    data: {
+                        bookname: "水浒传",
+                        author: "施耐庵",
+                        publisher: "上海图书出版社"
+                    },
+                    success: function (res) {
+                        console.log(res);
+                    }
+                })
+            })
+        })
+    </script>
+</head>
+<body>
+<button class="ajaxGETBtn">发起GET请求</button>
+<button class="ajaxPOSTBtn">发起POST请求</button>
+</body>
+</html>

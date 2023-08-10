@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="004_图书管理案例/js/jQuery.min.js"></script>
+    <script>
+        //$.get(url, [data], [callback], [type])--将服务器上的资源请求到客户端来使用
+        // url:待载入页面的URL地址
+        // data:待发送 Key/value 参数。
+        // callback:载入成功时回调函数。
+        // type:返回内容格式，xml, html, script, json, text, _default。
+        $(function () {
+            $('.getBtn').on('click', function () {
+                $.get('http://www.liulongbin.top:3006/api/getbooks', function (res) {
+                    console.log(res);
+                })
+            })
+
+            $('.getBtn1').on('click', function () {
+                $.get('http://www.liulongbin.top:3006/api/getbooks', {id: 1}, function (res) {
+                    console.log(res);
+                })
+            })
+        })
+    </script>
+</head>
+<body>
+<button class="getBtn">发起不带参数的GET请求</button>
+<button class="getBtn1">发起带参数的GET请求</button>
+</body>
+</html>

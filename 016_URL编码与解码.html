@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script>
+        var str1 = '前后端交互&异步编程';
+        var str2 = encodeURI(str1);
+        console.log(str2);//%E5%89%8D%E5%90%8E%E7%AB%AF%E4%BA%A4%E4%BA%92&%E5%BC%82%E6%AD%A5%E7%BC%96%E7%A8%8B
+
+        var str3 = decodeURI('%E5%89%8D%E5%90%8E%E7%AB%AF%E4%BA%A4%E4%BA%92&%E5%BC%82%E6%AD%A5%E7%BC%96%E7%A8%8B');
+        console.log(str3);//前后端交互&异步编程
+    </script>
+</head>
+<body>
+
+</body>
+</html>

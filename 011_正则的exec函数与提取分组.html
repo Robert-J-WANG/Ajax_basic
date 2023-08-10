@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script>
+        var str1 = 'hello';
+        var pattern1 = /o/;
+        //如果有匹配的值，则返回匹配值，否则返回null
+        console.log(pattern1.exec(str1));
+
+        var str2 = '<div>我是{{name}}</div>';
+        var pattern2 = /{{([a-zA-Z]+)}}/;
+        //如果有匹配的值，则返回匹配值，否则返回null
+        console.log(pattern2.exec(str2));
+    </script>
+</head>
+<body>
+
+</body>
+</html>

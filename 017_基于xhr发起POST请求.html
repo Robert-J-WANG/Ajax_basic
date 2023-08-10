@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script>
+        var xhr = new XMLHttpRequest();
+        //使用xhr 对象发起带参数的 GET 请求时，只需在调用 xhr.open 期间，为URL地址指定参数即可--查询字符串
+        //想加上多个参数的话，使用 & 符号进行分隔
+        xhr.open('POST', 'http://www.liulongbin.top:3006/api/addbook');
+        xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+        xhr.send('bookname=中国战争史&author=田昭林&publisher=江苏人名出版社');
+        xhr.onreadystatechange = function () {
+            if (xhr.readyState === 4 && xhr.status === 200) {
+                console.log(xhr.responseText);
+            }
+        }
+    </script>
+</head>
+<body>
+
+</body>
+</html>
